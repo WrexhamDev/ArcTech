@@ -3,15 +3,15 @@ local HOUSE_OWNER = '@Scribe Rob'
 local ARCANIST_GUILD_ID = 381665
 
 local HOUSES = {
-	main = { label = "|cffff00Main - Kthendral Deep Mines|r", owner = ArcTech.HOUSE_OWNER, id = 113 },
-	pvp = { label = "|cffff00PvP - Elinhir Arena|r", owner =ArcTech.HOUSE_OWNER, id = 66 },
-	auction = { label = "|cffff00Auction - Theatre of the Ancestors|r", owner = ArcTech.HOUSE_OWNER, id = 119 },
+	main = { label = "|cffff00Main - Kthendral Deep Mines|r", owner = HOUSE_OWNER, id = 113 },
+	pvp = { label = "|cffff00PvP - Elinhir Arena|r", owner =HOUSE_OWNER, id = 66 },
+	auction = { label = "|cffff00Auction - Theatre of the Ancestors|r", owner = HOUSE_OWNER, id = 119 },
 }
 
 local QR_DATA = "https://discord.gg/hj2eWtra66"
 local QR_SIZE = 240
 
-function ArcTech:InitSavedVars()
+function InitSavedVars()
 	SV = ZO_SavedVars:NewAccountWide("ArcTechSavedVars", 1, nil, {
         events = {
             { day = "monday", text = "" },
