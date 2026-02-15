@@ -1,18 +1,17 @@
 -- ArcTech.lua
-local ArcTech = ArcTech or {}
-
-local ADDON_NAME = "ArcTech"
-local initialised = false
+local ArcTech = {}
+ArcTech.addon_name = "ArcTech"
+ArcTech.initialised = false
 
 local function OnAddOnLoaded(event, addonName)
-    if addonName ~= ArcTech.ADDON_NAME then return end
-    EVENT_MANAGER:UnregisterForEvent(ArcTech.ADDON_NAME, EVENT_ADD_ON_LOADED)
+    if addonName ~= ArcTech.addon_name then return end
+    EVENT_MANAGER:UnregisterForEvent(ArcTech.addon_name, EVENT_ADD_ON_LOADED)
 
     Init()
 end
 
 function Init()
-    if initialised then return end
+    if ArcTech.initialised then return end
     initialised = true
 
     InitSavedVars()
@@ -22,6 +21,12 @@ function Init()
         InitLAM()
     else
         d("|c3cffbaArcTech loaded (LAM missing)|r")
+    end
+
+    if LibQRCode then
+        InitLQR()
+    else
+        d("|c3cffbaArcTech loaded (LQR missing)|r")
     end
 
     d("|c3cffbaArcTech loaded|r")
@@ -46,4 +51,4 @@ SLASH_COMMANDS["/gh"] = function()
     HandleGuildhouseSlash("main")
 end
 
-EVENT_MANAGER:RegisterForEvent(ArcTech.ADDON_NAME, EVENT_ADD_ON_LOADED, OnAddOnLoaded)
+EVENT_MANAGER:RegisterForEvent(ArcTech.addon_name, EVENT_ADD_ON_LOADED, OnAddOnLoaded)

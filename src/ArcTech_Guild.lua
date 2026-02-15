@@ -1,17 +1,19 @@
 -- ArcTech_Guild.lua
+local ArcTech = ArcTech
+
 function IsGuildMember()
 	local numGuilds = GetNumGuilds()
 	for i = 1, numGuilds do
 		local guildId = GetGuildId(i)
-		if guildId == self.ARCANIST_GUILD_ID then
+		if guildId == ArcTech.guild_id then
 			return true
 		end
 	end
 	return false
 end
 
-function ArcTech:IsOfficer()
-    local guildId = ARCANIST_GUILD_ID
+function IsOfficer()
+    local guildId = ArcTech.guild_id
 
     local DisplayName = GetDisplayName()
 
@@ -36,7 +38,9 @@ function CanApplyToGuild()
 end
 
 function ApplyToGuild(message)
-	local res = SubmitGuildFinderApplication(ARCANIST_GUILD_ID, message or "Application sent via ArcTech")
+    local res = SubmitGuildFinderApplication(ArcTech.guild_id, message)
+
+	d(res)
 
 	if GUILD_APPLICATION_RESPONSE_SUCCESS and res == GUILD_APPLICATION_RESPONSE_SUCCESS then
 		d("|c00ff00Application submitted successfully.|r")
@@ -58,7 +62,6 @@ function ApplyToGuild(message)
 		return
 	end
 
-	-- Fallback if enum constants are different / missing
 	if res == 0 then
 		d("|c00ff00Application submitted, a guild officer will review your application shortly!|r")
 	else

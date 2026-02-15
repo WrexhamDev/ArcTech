@@ -1,7 +1,9 @@
 -- ArcTech_QR.lua
+local ArcTech = ArcTech
+
 function CreateQRCode(parent)
-	local size = self.QR_SIZE
-	local data = self.QR_DATA
+	local size = ArcTech.QR.size
+	local data = ArcTech.QR.data
 
 	local qr = LibQRCode.CreateQRControl(size, data)
 	qr.SetParent(parent)
