@@ -42,6 +42,8 @@ function ArcTechSlash(arg)
 end
 
 SLASH_COMMANDS["/arctech"] = ArcTechSlash
-SLASH_COMMANDS["/gh"] = HandleGuildhouseSlash("main")
+SLASH_COMMANDS["/gh"] = function()
+    HandleGuildhouseSlash("main")
+end
 
 EVENT_MANAGER:RegisterForEvent(ArcTech.ADDON_NAME, EVENT_ADD_ON_LOADED, OnAddOnLoaded)
