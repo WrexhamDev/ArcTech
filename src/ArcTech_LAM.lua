@@ -9,7 +9,7 @@ function InitLAM()
 
 	local panelData = {
 		type = "panel",
-		name = ArcTech.addon_name,
+		name = "ArcTech",
 		author = "Scribe Rob",
 		version = "0.0.6",
 		registerForRefresh = true,
