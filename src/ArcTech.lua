@@ -1,5 +1,5 @@
 -- ArcTech.lua
-local ArcTech = {}
+ArcTech = {}
 ArcTech.addon_name = "ArcTech"
 ArcTech.initialised = false
 
