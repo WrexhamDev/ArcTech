@@ -1,5 +1,5 @@
 -- ArcTech_Guild.lua
-local ArcTech = ArcTech
+ArcTech = ArcTech
 
 function IsGuildMember()
 	local numGuilds = GetNumGuilds()

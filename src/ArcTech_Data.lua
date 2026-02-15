@@ -1,5 +1,5 @@
 -- ArcTech_Data.lua
-local ArcTech = ArcTech
+ArcTech = ArcTech
 
 ArcTech.house_owner = '@Scribe Rob'
 ArcTech.guild_id = 381665

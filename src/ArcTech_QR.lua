@@ -1,5 +1,5 @@
 -- ArcTech_QR.lua
-local ArcTech = ArcTech
+ArcTech = ArcTech
 
 function CreateQRCode(parent)
 	local size = ArcTech.QR.size

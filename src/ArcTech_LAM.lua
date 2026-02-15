@@ -1,5 +1,5 @@
 -- ArcTech_LAM.lua
-local ArcTech = ArcTech
+ArcTech = ArcTech
 
 function InitLAM()
 	local LAM = LibAddonMenu2

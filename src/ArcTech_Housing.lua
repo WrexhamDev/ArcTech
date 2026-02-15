@@ -1,5 +1,6 @@
 -- ArcTech_Housing.lua
-local ArcTech = ArcTech
+ArcTech = ArcTech
+
 function JumpToHouseEntry(house)
 	if not house or not house.id or house.id == 0 then return end
 
