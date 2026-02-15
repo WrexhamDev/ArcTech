@@ -12,10 +12,9 @@ end
 
 function Init()
     if ArcTech.initialised then return end
-    initialised = true
+    ArcTech.initialised = true
 
     InitSavedVars()
-    RegisterSlashCommands()
 
     if LibAddonMenu2 then
         InitLAM()
