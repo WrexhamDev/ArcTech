@@ -1,7 +1,5 @@
 -- ArcTech_Guild.lua
-ArcTech = ArcTech or {}
-
-function ArcTech:IsGuildMember()
+function IsGuildMember()
 	local numGuilds = GetNumGuilds()
 	for i = 1, numGuilds do
 		local guildId = GetGuildId(i)
@@ -13,42 +11,49 @@ function ArcTech:IsGuildMember()
 end
 
 function ArcTech:IsOfficer()
+    local guildId = ARCANIST_GUILD_ID
 
+    local DisplayName = GetDisplayName()
+
+    local numMembers = GetNumGuildMembers(guildId)
+    for i = 1, numMembers do
+        local name, note, rankIndex = GetGuildMemberInfo(guildId, i)
+
+        if name == DisplayName then
+            local hasAdmin =
+                DoesGuildRankHavePermission(guildId, rankIndex, GUILD_PERMISSION_MANAGE_APPLICATIONS)
+                or DoesGuildRankHavePermission(guildId, rankIndex, GUILD_PERMISSION_INVITE)
+
+            return hasAdmin
+        end
+    end
+
+    return false
 end
 
-function ArcTech:CanApplyToGuild()
-	return not self:IsGuildMember()
-	and type(SubmitGuildFinderApplication) == "function"
+function CanApplyToGuild()
+	return not IsGuildMember()
 end
 
-function ArcTech:ApplyToGuild(message)
-	if type(SubmitGuildFinderApplication) ~= "function" then
-		d("|cFF0000Guild Finder application API not available on this client.|r")
-		return
-	end
+function ApplyToGuild(message)
+	local res = SubmitGuildFinderApplication(ARCANIST_GUILD_ID, message or "Application sent via ArcTech")
 
-	local res = SubmitGuildFinderApplication(self.ARCANIST_GUILD_ID, message or "Application sent via ArcTech")
-
-	-- Always print the raw result for debugging
-	--d(string.format("|c3cffbaSubmitGuildFinderApplication returned: %s|r", tostring(res)))
-
-	-- Optional mapping (only works if these globals exist on your client)
-	if _G.GUILD_APPLICATION_RESPONSE_SUCCESS and res == _G.GUILD_APPLICATION_RESPONSE_SUCCESS then
+	if GUILD_APPLICATION_RESPONSE_SUCCESS and res == GUILD_APPLICATION_RESPONSE_SUCCESS then
 		d("|c00ff00Application submitted successfully.|r")
 		return
 	end
 
-	if _G.GUILD_APPLICATION_RESPONSE_ALREADY_APPLIED and res == _G.GUILD_APPLICATION_RESPONSE_ALREADY_APPLIED then
+	if GUILD_APPLICATION_RESPONSE_ALREADY_APPLIED and res == GUILD_APPLICATION_RESPONSE_ALREADY_APPLIED then
 		d("|cffff00You already have a pending application.|r")
 		return
 	end
 
-	if _G.GUILD_APPLICATION_RESPONSE_ALREADY_IN_GUILD and res == _G.GUILD_APPLICATION_RESPONSE_ALREADY_IN_GUILD then
+	if GUILD_APPLICATION_RESPONSE_ALREADY_IN_GUILD and res == GUILD_APPLICATION_RESPONSE_ALREADY_IN_GUILD then
 		d("|cffff00You are already in this guild.|r")
 		return
 	end
 
-	if _G.GUILD_APPLICATION_RESPONSE_GUILD_NOT_FOUND and res == _G.GUILD_APPLICATION_RESPONSE_GUILD_NOT_FOUND then
+	if GUILD_APPLICATION_RESPONSE_GUILD_NOT_FOUND and res == GUILD_APPLICATION_RESPONSE_GUILD_NOT_FOUND then
 		d("|cFF0000Guild not found in Guild Finder (may not be listed).|r")
 		return
 	end

@@ -1,28 +1,25 @@
 -- ArcTech_LAM.lua
-ArcTech = ArcTech or {}
-
-function ArcTech:InitLAM()
+function InitLAM()
 	local LAM = LibAddonMenu2
 	if not LAM then return end
 
 	local panelName = "ArcTechSettingsPanel"
-	self.panelName = panelName
 
 	local panelData = {
 		type = "panel",
 		name = "ArcTech",
 		author = "Scribe Rob",
-		version = "0.1.0",
+		version = "0.0.6",
 		registerForRefresh = true,
 		registerForDefaults = false,
 	}
 
-	LAM:RegisterAddonPanel(panelName, panelData)
-	LAM:RegisterOptionControls(panelName, self:BuildOptions())
+	LAM.RegisterAddonPanel(panelName, panelData)
+	LAM.RegisterOptionControls(panelName, BuildOptions())
 end
 
-function ArcTech:BuildOptions()
-	if not self:IsGuildMember() then
+function BuildOptions()
+	if not IsGuildMember() then
 		return {
 			{
 				type = "description",
@@ -33,44 +30,42 @@ function ArcTech:BuildOptions()
 				name = "Apply to Arcanists",
 				tooltip = "Sends an application to the Arcanists Guild",
 				disabled = function()
-					return not ArcTech:CanApplyToGuild()
+					return not CanApplyToGuild()
 				end,
 				func = function()
-					ArcTech:ApplyToGuild("Application submitted via the ArcTech console addon")
+					ApplyToGuild("Application submitted via the ArcTech console addon")
 				end,
 				width = "full",
 			},
 		}
 	end
 
-	local SV = self.SV
-
 	return {
 		{ type = "header", name = "|c286b1fGuild Houses|r" },
 
 		{
 			type = "button",
-			name = self.HOUSES.main.label,
+			name = HOUSES.main.label,
 			tooltip = "Jump to the Main Guild House.",
-			func = function() self:JumpToHouseEntry(self.HOUSES.main) end,
+			func = function() JumpToHouseEntry(HOUSES.main) end,
 			width = "full",
-			disabled = function() return (self.HOUSES.main.id or 0) == 0 end,
+			disabled = function() return (HOUSES.main.id or 0) == 0 end,
 		},
 		{
 			type = "button",
-			name = self.HOUSES.pvp.label,
+			name = HOUSES.pvp.label,
 			tooltip = "Jump to the PvP house.",
-			func = function() self:JumpToHouseEntry(self.HOUSES.pvp) end,
+			func = function() JumpToHouseEntry(HOUSES.pvp) end,
 			width = "full",
-			disabled = function() return (self.HOUSES.pvp.id or 0) == 0 end,
+			disabled = function() return (HOUSES.pvp.id or 0) == 0 end,
 		},
 		{
 			type = "button",
-			name = self.HOUSES.auction.label,
+			name = HOUSES.auction.label,
 			tooltip = "Jump to the Auction House.",
-			func = function() self:JumpToHouseEntry(self.HOUSES.auction) end,
+			func = function() JumpToHouseEntry(HOUSES.auction) end,
 			width = "full",
-			disabled = function() return (self.HOUSES.auction.id or 0) == 0 end,
+			disabled = function() return (HOUSES.auction.id or 0) == 0 end,
 		},
 
 		{ type = "divider" },
@@ -97,29 +92,16 @@ function ArcTech:BuildOptions()
 			type = "custom",
 			width = "full",
 			createFunc = function(parent)
-				return self:CreateLAMQRCodeRow(parent)
+				return CreateQRCode(parent)
 			end,
 		},
 	}
 end
 
---function ArcTech:RequestLAMRefresh()
-	--local LAM = LibAddonMenu2
-	--if not LAM then return end
+function ArcTech:RequestLAMRefresh()
+    local LAM = LibAddonMenu2
+    if not LAM then return end
 
---	local panelName = self.panelName or "ArcTechSettingsPanel"
-
-	-- Your build seems to NOT have util, so guard it hard.
---	if LAM.util and type(LAM.util.RequestRefreshIfNeeded) == "function" then
---		LAM.util.RequestRefreshIfNeeded(panelName)
---		return
---	end
-
-	-- Some other builds expose it as a direct method
---	if type(LAM.RequestRefreshIfNeeded) == "function" then
---		LAM:RequestRefreshIfNeeded(panelName)
---		return
---	end
-
--- No supported refresh method on this LAM build: do nothing (no error).
---end
+    local panelName = panelName or "ArcTechSettingsPanel"
+    LAM.RequestRefreshIfNeeded(panelName)
+end

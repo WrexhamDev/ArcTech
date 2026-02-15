@@ -1,25 +1,25 @@
 -- ArcTech.lua
-ArcTech = ArcTech or {}
+local ArcTech = ArcTech or {}
 
-ArcTech.ADDON_NAME = "ArcTech"
-ArcTech.initialised = false
+local ADDON_NAME = "ArcTech"
+local initialised = false
 
 local function OnAddOnLoaded(event, addonName)
     if addonName ~= ArcTech.ADDON_NAME then return end
     EVENT_MANAGER:UnregisterForEvent(ArcTech.ADDON_NAME, EVENT_ADD_ON_LOADED)
 
-    ArcTech:Init()
+    Init()
 end
 
-function ArcTech:Init()
-    if self.initialised then return end
-    self.initialised = true
+function Init()
+    if initialised then return end
+    initialised = true
 
-    self:InitSavedVars()
-    self:RegisterSlashCommands()
+    InitSavedVars()
+    RegisterSlashCommands()
 
     if LibAddonMenu2 then
-        self:InitLAM()
+        InitLAM()
     else
         d("|c3cffbaArcTech loaded (LAM missing)|r")
     end
@@ -27,10 +27,21 @@ function ArcTech:Init()
     d("|c3cffbaArcTech loaded|r")
 end
 
-function ArcTech:RegisterSlashCommands()
-    SLASH_COMMANDS["/guildhouse"] = function(arg)
-        self:HandleGuildhouseSlash(arg)
+function ArcTechSlash(arg)
+    arg = string.lower(tostring(arg or ""))
+
+    if arg == 'house' then
+        SLASH_COMMANDS["/guildhouse"] = function(arg)
+            HandleGuildhouseSlash(arg)
+        end
+    end
+
+    if arg == 'discord' then
+        d('in the future this will open discord QR Code')
     end
 end
+
+SLASH_COMMANDS["/arctech"] = ArcTechSlash
+SLASH_COMMANDS["/gh"] = HandleGuildhouseSlash("main")
 
 EVENT_MANAGER:RegisterForEvent(ArcTech.ADDON_NAME, EVENT_ADD_ON_LOADED, OnAddOnLoaded)

@@ -1,7 +1,5 @@
 -- ArcTech_Housing.lua
-ArcTech = ArcTech or {}
-
-function ArcTech:JumpToHouseEntry(entry)
+function JumpToHouseEntry(entry)
 	if not entry or not entry.id or entry.id == 0 then return end
 
 	local owner = entry.owner
@@ -17,12 +15,12 @@ function ArcTech:JumpToHouseEntry(entry)
 	end
 end
 
-function ArcTech:HandleGuildhouseSlash(arg)
+function HandleGuildhouseSlash(arg)
 	arg = string.lower(tostring(arg or ""))
 
 	if arg == "" or arg == "main" then self:JumpToHouseEntry(self.HOUSES.main) return end
 	if arg == "pvp" then self:JumpToHouseEntry(self.HOUSES.pvp) return end
 	if arg == "auction" then self:JumpToHouseEntry(self.HOUSES.auction) return end
 
-	d("|cffff00ArcTech|r usage: /guildhouse main | pvp | auction")
+	d("|cffff00ArcTech|r usage: /arctech dhouse main/pvp/auction")
 end
