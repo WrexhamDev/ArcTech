@@ -74,13 +74,13 @@ function BuildOptions()
 
 		{ type = "header", name = "|c286b1fEvents for week commencing: 16-02-26|r" },
 
-        { type="description", text="|cc7cdbfMonday|r",    tooltip=function() return SV.events.monday    ~= "" and SV.events.monday    or "No events happening for this day" end },
-        { type="description", text="|cc7cdbfTuesday|r",   tooltip=function() return SV.events.tuesday   ~= "" and SV.events.tuesday   or "No events happening for this day" end },
-        { type="description", text="|cc7cdbfWednesday|r", tooltip=function() return SV.events.wednesday ~= "" and SV.events.wednesday or "No events happening for this day" end },
-        { type="description", text="|cc7cdbfThursday|r",  tooltip=function() return SV.events.thursday  ~= "" and SV.events.thursday  or "No events happening for this day" end },
-        { type="description", text="|cc7cdbfFriday|r",    tooltip=function() return SV.events.friday    ~= "" and SV.events.friday    or "No events happening for this day" end },
-        { type="description", text="|cc7cdbfSaturday|r",  tooltip=function() return SV.events.saturday  ~= "" and SV.events.saturday  or "No events happening for this day" end },
-        { type="description", text="|cc7cdbfSunday|r",    tooltip=function() return SV.events.sunday    ~= "" and SV.events.sunday    or "No events happening for this day" end },
+        { type="description", title="my text block", text="|cc7cdbfMonday|r",    tooltip=function() return ArcTech.SV.events.monday    ~= "" and ArcTech.SV.events.monday    or "No events happening for this day" end },
+        { type="description", title="my text block", text="|cc7cdbfTuesday|r",   tooltip=function() return ArcTech.SV.events.tuesday   ~= "" and ArcTech.SV.events.tuesday   or "No events happening for this day" end },
+        { type="description", title="my text block", text="|cc7cdbfWednesday|r", tooltip=function() return ArcTech.SV.events.wednesday ~= "" and ArcTech.SV.events.wednesday or "No events happening for this day" end },
+        { type="description", title="my text block", text="|cc7cdbfThursday|r",  tooltip=function() return ArcTech.SV.events.thursday  ~= "" and ArcTech.SV.events.thursday  or "No events happening for this day" end },
+        { type="description", title="my text block", text="|cc7cdbfFriday|r",    tooltip=function() return ArcTech.SV.events.friday    ~= "" and ArcTech.SV.events.friday    or "No events happening for this day" end },
+        { type="description", title="my text block", text="|cc7cdbfSaturday|r",  tooltip=function() return ArcTech.SV.events.saturday  ~= "" and ArcTech.SV.events.saturday  or "No events happening for this day" end },
+        { type="description", title="my text block", text="|cc7cdbfSunday|r",    tooltip=function() return ArcTech.SV.events.sunday    ~= "" and ArcTech.SV.events.sunday    or "No events happening for this day" end },
 
 		{ type = "divider" },
 
