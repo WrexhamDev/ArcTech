@@ -16,8 +16,8 @@ function InitLAM()
 		registerForDefaults = false,
 	}
 
-	LAM.RegisterAddonPanel(panelName, panelData)
-	LAM.RegisterOptionControls(panelName, BuildOptions())
+	LAM:RegisterAddonPanel(panelName, panelData)
+	LAM:RegisterOptionControls(panelName, BuildOptions())
 end
 
 function BuildOptions()
