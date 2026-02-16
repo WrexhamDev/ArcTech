@@ -110,28 +110,48 @@ function BuildOptions()
     -- ===== Events (members only) =====
     opts[#opts + 1] = { type = "header", name = "|c286b1fEvents for week commencing: 16-02-26|r" }
 
-    local function EventTip(day)
-        local v = ArcTech.SV and ArcTech.SV.events and ArcTech.SV.events[day]
-        if not IsGuildMember() then return "Locked: join Arcanists to view events." end
-        return (v and v ~= "") and v or "No events happening for this day"
+    local function GetEventText(dayKey)
+        local events = ArcTech.SV and ArcTech.SV.events
+        local v = events and events[dayKey]
+        if type(v) ~= "string" then v = "" end
+        return v
     end
 
-    local function EventRow(header, dayKey)
+    local function EventTip(dayKey)
+        if not IsGuildMember() then
+            return "Locked: join Arcanists to view events."
+        end
+
+        local v = GetEventText(dayKey)
+        return (v ~= "" and v) or "No events happening for this day"
+    end
+
+    local function EventLabel(dayName, dayKey)
+        local v = GetEventText(dayKey)
+
+        -- your rule:
+        -- c7cdbf if "", ff0000 if it has a value
+        local color = (v == "" and "c7cdbf") or "ff0000"
+
+        return string.format("|c%s%s|r", color, dayName)
+    end
+
+    local function EventRow(dayName, dayKey)
         return {
             type = "button",
-            name = header,
+            name = function() return EventLabel(dayName, dayKey) end, -- dynamic
             tooltip = function() return EventTip(dayKey) end,
             disabled = true,
         }
     end
 
-    opts[#opts + 1] = EventRow("|cc7cdbfMonday|r", "monday")
-    opts[#opts + 1] = EventRow("|cc7cdbfTuesday|r", "tuesday")
-    opts[#opts + 1] = EventRow("|cc7cdbfWednesday|r", "wednesday")
-    opts[#opts + 1] = EventRow("|cc7cdbfThursday|r", "thursday")
-    opts[#opts + 1] = EventRow("|cc7cdbfFriday|r", "friday")
-    opts[#opts + 1] = EventRow("|cc7cdbfSaturday|r", "saturday")
-    opts[#opts + 1] = EventRow("|cc7cdbfSunday|r", "sunday")
+    opts[#opts + 1] = EventRow("Monday", "monday")
+    opts[#opts + 1] = EventRow("Tuesday", "tuesday")
+    opts[#opts + 1] = EventRow("Wednesday", "wednesday")
+    opts[#opts + 1] = EventRow("Thursday", "thursday")
+    opts[#opts + 1] = EventRow("Friday", "friday")
+    opts[#opts + 1] = EventRow("Saturday", "saturday")
+    opts[#opts + 1] = EventRow("Sunday", "sunday")
 
     opts[#opts + 1] = { type = "divider" }
 
