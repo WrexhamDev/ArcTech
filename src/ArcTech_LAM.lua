@@ -91,7 +91,7 @@ function BuildOptions()
             name = "Scan the QR code to access the Discord Server.",
             tooltip = "Point your phone camera at the QR code (or screenshot it) to join.",
             func = function ()
-                return LibQRCode.CreateQRCode(Arctech.QR.size, ArcTech.QR.data)
+                return LibQRCode.CreateQRCode(ArcTech.QR.size, ArcTech.QR.data)
             end,
 		    text = "Scan the QR code to access the Discord Server."
 		}
