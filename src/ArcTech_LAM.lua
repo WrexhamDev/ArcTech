@@ -165,18 +165,24 @@ function BuildOptions()
 
     opts[#opts + 1] = EventRow("Monday", "monday")
     opts[#opts + 1] = {
-        type = 'editbox',
-        name = 'Edit Monday Event',
+        type = "editbox",
+        name = "Edit Monday Event",
+        tooltip = "Edit Monday's event",
+        isMultiLine = true,
+        width = "full",
+
         getFunc = function()
-            return ArcTech.SV.monday
+            return (ArcTech.SV and ArcTech.SV.events and ArcTech.SV.events.monday) or ""
         end,
         setFunc = function(v)
-            print(v)
+            ArcTech.SV.events.monday = tostring(v or "")
+            d("Monday event updated.")
+--            if RequestLAMRefresh then RequestLAMRefresh() end
         end,
-        isMultiLine = true,
-        requiresReload = true,
-        disabled = not IsOfficer(),
-        tooltip = 'Edit Mondays Event'
+        disabled = function()
+            return not IsOfficer()
+        end,
+        requiresReload = false,
     }
     opts[#opts + 1] = EventRow("Tuesday", "tuesday")
     opts[#opts + 1] = EventRow("Wednesday", "wednesday")
