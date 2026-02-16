@@ -10,6 +10,12 @@ ArcTech.houses = {
 	auction = { label = "|cffff00Auction - Theatre of the Ancestors|r", owner = ArcTech.house_owner, id = 119 },
 }
 
+ArcTech.Status_Colours = {
+    standard = '|cc7cdbf',
+    active = '|c568203',
+    disabled = '|cff0000'
+}
+
 ArcTech.QR = {data = "https://discord.gg/hj2eWtra66", size = 240}
 
 function InitSavedVars()
