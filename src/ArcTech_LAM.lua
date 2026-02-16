@@ -155,11 +155,11 @@ function BuildOptions()
             type = "button",
             name = function()
                 -- We keep these rows unclickable; colour them as disabled
-                local enabled = false
+                local enabled = ArcTech.SV.dayName ~= ""
                 return EventLabel(dayName, dayKey, enabled)
             end,
             tooltip = function() return EventTip(dayKey) end,
-            disabled = true,
+            disabled = false,
         }
     end
 
