@@ -33,7 +33,7 @@ function ArcTechSlash(arg)
     arg = string.lower(tostring(arg or ""))
 
     if arg == 'house' then
-        SLASH_COMMANDS["/guildhouse"] = function(arg)
+        SLASH_COMMANDS["/guildhouse"] = function()
             HandleGuildhouseSlash(arg)
         end
     end
