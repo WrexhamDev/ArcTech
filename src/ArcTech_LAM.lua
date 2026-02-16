@@ -83,8 +83,6 @@ function BuildOptions()
     opts[#opts + 1] = HouseButton(ArcTech.houses.pvp, "Jump to the PvP house.")
     opts[#opts + 1] = HouseButton(ArcTech.houses.auction, "Jump to the Auction House.")
 
-    opts[#opts + 1] = { type = "divider" }
-
     -- ===== Non-member block (apply) =====
     if not IsGuildMember() then
         opts[#opts + 1] = {
@@ -106,9 +104,7 @@ function BuildOptions()
             end,
             width = "full",
         }
-
-        opts[#opts + 1] = { type = "divider" }
-    end
+ end
 
     -- ===== Officer-only fun button =====
     opts[#opts + 1] = { type = "header", name = ColorText("active", "Super Secret Button") }
@@ -124,8 +120,6 @@ function BuildOptions()
         width = "full",
         disabled = OfficerOnlyDisabled,
     }
-
-    opts[#opts + 1] = { type = "divider" }
 
     -- ===== Events (members only) =====
     opts[#opts + 1] = { type = "header", name = ColorText("active", "Events for week commencing: 16-02-26") }
@@ -176,8 +170,6 @@ function BuildOptions()
     opts[#opts + 1] = EventRow("Friday", "friday")
     opts[#opts + 1] = EventRow("Saturday", "saturday")
     opts[#opts + 1] = EventRow("Sunday", "sunday")
-
-    opts[#opts + 1] = { type = "divider" }
 
     -- ===== Discord / QR (members only) =====
     opts[#opts + 1] = { type = "header", name = ColorText("active", "Discord Access") }
