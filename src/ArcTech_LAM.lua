@@ -116,12 +116,12 @@ function BuildOptions()
         return (v and v ~= "") and v or "No events happening for this day"
     end
 
-    local function EventRow(label, dayKey)
+    local function EventRow(header, dayKey)
         return {
-            type = "description",
-            text = label,
+            type = "button",
+            name = header,
             tooltip = function() return EventTip(dayKey) end,
-            disabled = MembersOnlyDisabled, -- (description supports this on most LAM builds)
+            disabled = true,
         }
     end
 
