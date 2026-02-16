@@ -164,6 +164,20 @@ function BuildOptions()
     end
 
     opts[#opts + 1] = EventRow("Monday", "monday")
+    opts[#opts + 1] = {
+        type = 'editbox',
+        name = 'Edit Monday Event',
+        getFunc = function()
+            return ArcTech.SV.monday
+        end,
+        setFunc = function(v)
+            print(v)
+        end,
+        isMultiLine = true,
+        requiresReload = true,
+        disabled = not IsOfficer(),
+        tooltip = 'Edit Mondays Event'
+    }
     opts[#opts + 1] = EventRow("Tuesday", "tuesday")
     opts[#opts + 1] = EventRow("Wednesday", "wednesday")
     opts[#opts + 1] = EventRow("Thursday", "thursday")
