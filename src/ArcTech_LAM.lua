@@ -42,7 +42,23 @@ function BuildOptions()
 		}
 	end
 
-	return {
+    return {
+
+        { type = "header", name = "|c286b1fSuper Secret Button|r" },
+
+        {
+            type = "button",
+            name = "Don't press me!",
+            tooltip = "What does this do",
+            func = function() JumpToHouseEntry(ArcTech.houses.main) end,
+            width = "full",
+            disabled = function()
+                return not IsOfficer()
+            end,
+        },
+
+        { type = "divider" },
+
 		{ type = "header", name = "|c286b1fGuild Houses|r" },
 
 		{
@@ -90,8 +106,12 @@ function BuildOptions()
             type = "button",
             name = "Scan the QR code to access the Discord Server.",
             tooltip = "Point your phone camera at the QR code (or screenshot it) to join.",
-            func = function ()
-                LibQRCode.CreateQRCode(ArcTech.QR.size, ArcTech.QR.data)
+            func = function (parent)
+                local qr = LibQRCode.CreateQRControl(ArcTech.QR.size, ArcTech.QR.data)
+                qr:SetParent(parent)
+                qr:ClearAnchors()
+                qr:SetAnchor(TOPLEFT, parent, TOPLEFT, 0, 0)
+                return qr
             end,
 		    text = "Scan the QR code to access the Discord Server."
 		}

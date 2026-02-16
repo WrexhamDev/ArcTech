@@ -22,9 +22,7 @@ function Init()
         d("|c3cffbaArcTech loaded (LAM missing)|r")
     end
 
-    if LibQRCode then
-        --InitLQR()
-    else
+    if not LibQRCode then
         d("|c3cffbaArcTech loaded (LQR missing)|r")
     end
 
