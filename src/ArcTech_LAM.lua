@@ -168,9 +168,8 @@ function BuildOptions()
             qr:SetParent(parent)
             qr:ClearAnchors()
             qr:SetAnchor(TOPLEFT, parent, TOPLEFT, 0, 0)
-
-            parent:SetHeight(size + 8)
-            return qr        end,
+            return qr
+        end,
         tooltip = function() return LockedTooltip("Point your phone camera at the QR code (or screenshot it) to join.") end,
     }
 
