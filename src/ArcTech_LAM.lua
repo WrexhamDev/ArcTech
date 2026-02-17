@@ -64,7 +64,7 @@ function BuildOptions()
     local opts = {}
 
     -- ===== Guild Houses (always visible) =====
-    opts[#opts + 1] = { type = "header", name = ColorText("active", "Guild Houses") }
+    opts[#opts + 1] = { type = "header", name = ColorText("active", "\n              Guild Houses\n") }
 
     -- Button labels: standard unless the button is disabled (then disabled colour)
     local function HouseButton(entry, tooltipText)
@@ -106,23 +106,8 @@ function BuildOptions()
         }
  end
 
-    -- ===== Officer-only fun button =====
-    opts[#opts + 1] = { type = "header", name = ColorText("active", "Super Secret Button") }
-
-    opts[#opts + 1] = {
-        type = "button",
-        name = function()
-            local enabled = not OfficerOnlyDisabled()
-            return ColorTextIf(enabled, "standard", "Don't press me!")
-        end,
-        tooltip = function() return LockedTooltip("What does this do") end,
-        func = function() JumpToHouseEntry(ArcTech.houses.main) end,
-        width = "full",
-        disabled = OfficerOnlyDisabled,
-    }
-
     -- ===== Events (members only) =====
-    opts[#opts + 1] = { type = "header", name = ColorText("active", "Events for week commencing: 16-02-26") }
+    opts[#opts + 1] = { type = "header", name = ColorText("active", "\n              Events for week:\n                   16-02-26\n") }
 
     local function GetEventText(dayKey)
         local events = ArcTech.SV and ArcTech.SV.events
@@ -164,26 +149,6 @@ function BuildOptions()
     end
 
     opts[#opts + 1] = EventRow("Monday", "monday")
-    opts[#opts + 1] = {
-        type = "editbox",
-        name = "Edit Monday Event",
-        tooltip = "Edit Monday's event",
-        isMultiLine = true,
-        width = "full",
-
-        getFunc = function()
-            return (ArcTech.SV and ArcTech.SV.events and ArcTech.SV.events.monday) or ""
-        end,
-        setFunc = function(v)
-            ArcTech.SV.events.monday = tostring(v or "")
-            d("Monday event updated.")
---            if RequestLAMRefresh then RequestLAMRefresh() end
-        end,
-        disabled = function()
-            return not IsOfficer()
-        end,
-        requiresReload = false,
-    }
     opts[#opts + 1] = EventRow("Tuesday", "tuesday")
     opts[#opts + 1] = EventRow("Wednesday", "wednesday")
     opts[#opts + 1] = EventRow("Thursday", "thursday")
@@ -192,47 +157,24 @@ function BuildOptions()
     opts[#opts + 1] = EventRow("Sunday", "sunday")
 
     -- ===== Discord / QR (members only) =====
-    opts[#opts + 1] = { type = "header", name = ColorText("active", "Discord Access") }
+    opts[#opts + 1] = { type = "header", name = ColorText("active", "\n              Discord Access\n") }
 
     opts[#opts + 1] = {
-        type = "description",
-        text = ColorText("standard", "Scan the QR code to access the Discord Server."),
-        tooltip = function() return LockedTooltip("Point your phone camera at the QR code (or screenshot it) to join.") end,
-    }
-
-    opts[#opts + 1] = {
-        type = "custom",
-        width = "full",
-        disabled = MembersOnlyDisabled,
-        createFunc = function(parent)
-            if not IsGuildMember() then
-                local lbl = WINDOW_MANAGER:CreateControl(nil, parent, CT_LABEL)
-                lbl:SetAnchor(TOPLEFT, parent, TOPLEFT, 0, 0)
-                lbl:SetText(ColorText("disabled", "Join Arcanists to view the QR code."))
-                parent:SetHeight(24)
-                return lbl
-            end
-
-            if not LibQRCode or not LibQRCode.CreateQRControl then
-                local lbl = WINDOW_MANAGER:CreateControl(nil, parent, CT_LABEL)
-                lbl:SetAnchor(TOPLEFT, parent, TOPLEFT, 0, 0)
-                lbl:SetText(ColorText("disabled", "LibQRCode missing or not loaded"))
-                parent:SetHeight(24)
-                return lbl
-            end
-
-            local size = (ArcTech.QR and ArcTech.QR.size) or 240
-            local data = (ArcTech.QR and ArcTech.QR.data) or ""
-
-            local qr = LibQRCode.CreateQRControl(size, data)
+        type = "button",
+        name = ColorText("standard", "Scan the QR code to access the Discord Server."),
+        func = function()
+            local ArcTech_QR = ArcTech.QR
+            local qr = LibQRCode.CreateQRControl(ArcTech_QR.size, ArcTech_QR.data)
             qr:SetParent(parent)
             qr:ClearAnchors()
             qr:SetAnchor(TOPLEFT, parent, TOPLEFT, 0, 0)
 
             parent:SetHeight(size + 8)
-            return qr
-        end,
+            return qr        end,
+        tooltip = function() return LockedTooltip("Point your phone camera at the QR code (or screenshot it) to join.") end,
     }
+
+
 
     return opts
 end
