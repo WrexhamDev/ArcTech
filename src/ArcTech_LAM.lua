@@ -64,9 +64,9 @@ function BuildOptions()
     local opts = {}
     local memberCount = GetNumGuildMembers(ArcTech.guild_id)
     opts[#opts + 1] = { type = "header", name = ColorText("active", "\n             Guild Information\n") }
-    opts[#opts + 1] = { type = "button", name = ColorText("standard", "Guild Members: " .. tostring(memberCount or 0)), disabled = true }
-    opts[#opts + 1] = { type = "button", name = ColorText("standard", "Your Points: 0 (Not Implemented Yet)"), disabled = true }
-    opts[#opts + 1] = { type = "button", name = ColorText("standard", "Your Raffle Tickets: 0/50 (Not Implemented Yet)"), disabled = true }
+    opts[#opts + 1] = { type = "button", name = ColorText("standard", "Guild Members: " .. tostring(memberCount or 0) .. " / 500"), disabled = true }
+    opts[#opts + 1] = { type = "button", name = ColorText("disabled", "Your Points: 0 (Not Implemented Yet)"), disabled = true }
+    opts[#opts + 1] = { type = "button", name = ColorText("disabled", "Your Raffle Tickets: 0/50 (Not Implemented Yet)"), disabled = true }
 
 
     -- ===== Guild Houses (always visible) =====
