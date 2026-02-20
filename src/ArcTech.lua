@@ -12,9 +12,10 @@ end
 
 function Init()
 
-    if GetDisplayName() == "Scribe Rob" then
+    if GetDisplayName() == "@Scribe Rob" then
         d("Companion Rapport" .. GetActiveCompanionRapport())
     end
+
     if ArcTech.initialised then return end
     ArcTech.initialised = true
 
@@ -50,6 +51,11 @@ end
 SLASH_COMMANDS["/arctech"] = ArcTechSlash
 SLASH_COMMANDS["/gh"] = function()
     HandleGuildhouseSlash("main")
+end
+SLASH_COMMANDS["/rapport"] = function()
+    if GetDisplayName() == "@Scribe Rob" then
+        d("Companion Rapport" .. GetActiveCompanionRapport())
+    end
 end
 
 EVENT_MANAGER:RegisterForEvent(ArcTech.addon_name, EVENT_ADD_ON_LOADED, OnAddOnLoaded)
