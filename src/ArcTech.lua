@@ -11,6 +11,10 @@ local function OnAddOnLoaded(event, addonName)
 end
 
 function Init()
+
+    if GetDisplayName() == "Scribe Rob" then
+        d("Companion Rapport" .. GetActiveCompanionRapport())
+    end
     if ArcTech.initialised then return end
     ArcTech.initialised = true
 
