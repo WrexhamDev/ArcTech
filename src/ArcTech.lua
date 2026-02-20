@@ -53,9 +53,7 @@ SLASH_COMMANDS["/gh"] = function()
     HandleGuildhouseSlash("main")
 end
 SLASH_COMMANDS["/rapport"] = function()
-    if GetDisplayName() == "@Scribe Rob" then
-        d("Companion Rapport" .. GetActiveCompanionRapport())
-    end
+        d("Companion Rapport: " .. GetActiveCompanionRapport())
 end
 
 EVENT_MANAGER:RegisterForEvent(ArcTech.addon_name, EVENT_ADD_ON_LOADED, OnAddOnLoaded)
